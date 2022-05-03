@@ -1,4 +1,4 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
 
 const LINKING_ERROR =
   `The package 'keycommandlib' doesn't seem to be linked. Make sure: \n\n` +
@@ -17,6 +17,15 @@ const Keycommandlib = NativeModules.Keycommandlib
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Keycommandlib.multiply(a, b);
+export function registerKeyCommand(a: number): Promise<number> {
+  return Keycommandlib.registerKeyCommand(a);
 }
+
+export const eventEmitter = new NativeEventEmitter(Keycommandlib);
+
+export const constants = Keycommandlib.getConstants();
+
+eventEmitter.addListener('onKeyCommand', (event) => {
+  console.log(event.input)
+});
+

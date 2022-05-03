@@ -11,11 +11,11 @@ npm install keycommandlib
 ## Usage
 
 ```js
-import { multiply } from "keycommandlib";
+import { registerKeyCommand } from "keycommandlib";
 
 // ...
 
-const result = await multiply(3, 7);
+const result = await registerKeyCommand(3, 7);
 ```
 
 ## Contributing
