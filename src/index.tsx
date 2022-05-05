@@ -18,7 +18,7 @@ const Keycommandlib = NativeModules.Keycommandlib
     );
 
 export function registerKeyCommand(a: number): Promise<number> {
-  return Keycommandlib.registerKeyCommand(a);
+  // return Keycommandlib.registerKeyCommand(a);
 }
 
 export const eventEmitter = new NativeEventEmitter(Keycommandlib);
@@ -26,6 +26,5 @@ export const eventEmitter = new NativeEventEmitter(Keycommandlib);
 export const constants = Keycommandlib.getConstants();
 
 eventEmitter.addListener('onKeyCommand', (event) => {
-  console.log(event.input)
+  console.log(event)
 });
-

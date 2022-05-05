@@ -258,6 +258,11 @@ RCT_NOT_IMPLEMENTED(-(instancetype)init)
 
 RCT_EXPORT_MODULE()
 
++ (BOOL)requiresMainQueueSetup
+{
+  return YES;
+}
+
 - (NSArray<NSString *> *)supportedEvents
 {
   return @[@"onKeyCommand"];

@@ -16,7 +16,7 @@ public class KeycommandlibPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new KeycommandlibModule(reactContext));
+        modules.add(KeycommandlibModule.initKeycommandlibModule(reactContext));
         return modules;
     }
 
