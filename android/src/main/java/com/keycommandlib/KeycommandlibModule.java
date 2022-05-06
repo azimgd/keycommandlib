@@ -11,7 +11,7 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
-import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.ReadableArray;
 
 import android.view.KeyEvent;
 
@@ -95,7 +95,7 @@ public class KeycommandlibModule extends ReactContextBaseJavaModule {
 
     params.putInt("keyCode", keyCode);
     params.putInt("action", action);
-    params.putString("pressedKey", String.valueOf(pressedKey));
+    params.putString("input", String.valueOf(pressedKey));
 
     return params;
   }
@@ -115,12 +115,12 @@ public class KeycommandlibModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void registerKeyCommand(ReadableMap a, int b, Promise promise) {
+  public void registerKeyCommand(ReadableArray json, Promise promise) {
     promise.resolve(null);
   }
 
   @ReactMethod
-  public void unregisterKeyCommand(ReadableMap a, int b, Promise promise) {
+  public void unregisterKeyCommand(ReadableArray json, Promise promise) {
     promise.resolve(null);
   }
 }

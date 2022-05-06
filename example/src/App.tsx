@@ -4,6 +4,8 @@ import { StyleSheet, View, Text } from 'react-native';
 import { registerKeyCommand, constants, eventEmitter } from 'keycommandlib';
 
 export default function App() {
+  const [history, setHistory] = React.useState([]);
+
   React.useEffect(() => {
     registerKeyCommand([
       {
@@ -13,7 +15,8 @@ export default function App() {
     ]);
 
     const eventListener = eventEmitter.addListener('onKeyCommand', (event) => {
-      console.log(event);
+      console.log(321)
+      setHistory(state => [event, ...state].slice(0, 20));
     });
 
     return eventListener.remove;
@@ -21,7 +24,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <Text>KeyCommandLib</Text>
+      {history.map((item, key) => (
+        <Text key={key}>{JSON.stringify(item)}</Text>
+      ))}
     </View>
   );
 }
