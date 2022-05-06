@@ -17,14 +17,23 @@ const Keycommandlib = NativeModules.Keycommandlib
       }
     );
 
-export function registerKeyCommand(a: number): Promise<number> {
-  // return Keycommandlib.registerKeyCommand(a);
+type TKeyCommand = {
+  input: String;
+  modifierFlags: String;
+};
+
+export function registerKeyCommand(
+  keycommands: TKeyCommand[]
+): Promise<number> {
+  return Keycommandlib.registerKeyCommand(keycommands);
+}
+
+export function unregisterKeyCommand(
+  keycommands: TKeyCommand[]
+): Promise<number> {
+  return Keycommandlib.unregisterKeyCommand(keycommands);
 }
 
 export const eventEmitter = new NativeEventEmitter(Keycommandlib);
 
 export const constants = Keycommandlib.getConstants();
-
-eventEmitter.addListener('onKeyCommand', (event) => {
-  console.log(event)
-});

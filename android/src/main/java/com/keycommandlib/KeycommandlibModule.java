@@ -11,8 +11,14 @@ import com.facebook.react.module.annotations.ReactModule;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeMap;
+import com.facebook.react.bridge.ReadableMap;
 
 import android.view.KeyEvent;
+
+import java.util.Set;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 
 @ReactModule(name = KeycommandlibModule.NAME)
 public class KeycommandlibModule extends ReactContextBaseJavaModule {
@@ -21,6 +27,8 @@ public class KeycommandlibModule extends ReactContextBaseJavaModule {
   private static KeycommandlibModule instance = null;
 
   public static final String NAME = "Keycommandlib";
+
+  private static final Set<String> commandsArray = new HashSet<String>();
 
   public KeycommandlibModule(ReactApplicationContext reactContext) {
     super(reactContext);
@@ -99,12 +107,20 @@ public class KeycommandlibModule extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  @ReactMethod
-  public void multiply(int a, int b, Promise promise) {
-    promise.resolve(a * b);
+  @Override
+  public Map<String, Object> getConstants() {
+    final Map<String, Object> constants = new HashMap<>();
+    constants.put("DEFAULT_EVENT_NAME", "New Event");
+    return constants;
   }
 
-  public static native int nativeMultiply(int a, int b);
+  @ReactMethod
+  public void registerKeyCommand(ReadableMap a, int b, Promise promise) {
+    promise.resolve(null);
+  }
+
+  @ReactMethod
+  public void unregisterKeyCommand(ReadableMap a, int b, Promise promise) {
+    promise.resolve(null);
+  }
 }

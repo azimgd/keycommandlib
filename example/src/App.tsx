@@ -1,21 +1,27 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { registerKeyCommand, constants } from 'keycommandlib';
+import { registerKeyCommand, constants, eventEmitter } from 'keycommandlib';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
-
   React.useEffect(() => {
-    registerKeyCommand([{
-      input: 'k',
-      modifierFlags: constants.keyModifierCommand,
-    }]);
+    registerKeyCommand([
+      {
+        input: 'k',
+        modifierFlags: constants.keyModifierCommand,
+      },
+    ]);
+
+    const eventListener = eventEmitter.addListener('onKeyCommand', (event) => {
+      console.log(event);
+    });
+
+    return eventListener.remove;
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>KeyCommandLib</Text>
     </View>
   );
 }
